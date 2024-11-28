@@ -51,8 +51,8 @@
                     {% if col == None %}
                     <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}" step="any">
                     {% elif col[1] %}
-                    <input form="form-{{row['zid']}}" type="checkbox" name="marks-{{i}}" {% if mark %}checked{% endif %}
-                        value="{{col[2]}}">
+                    <input form="form-{{row['zid']}}" type="checkbox" name="marks-{{i}}" {% if mark and mark !="0"
+                        %}checked{% endif %} value="{{col[2]}}">
                     {% else %}
                     <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}" max="{{col[2]}}"
                         min="0" step="any">
