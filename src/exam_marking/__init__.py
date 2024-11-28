@@ -61,7 +61,8 @@ def main(
         answers = SEPARATOR_REGEX.split(import_answers.read())
         answers = [strip_lines(a) for a in answers if strip_lines(a)]
 
-        for zid, answer in batched(answers, 2):
+        for i in range(0, len(answers), 2):
+            zid, answer = answers[i : i + 2]
             assert ZID_REGEX.match(zid) and not ZID_REGEX.match(
                 answer
             ), f"an answer assigned to '{zid}' is invalid"

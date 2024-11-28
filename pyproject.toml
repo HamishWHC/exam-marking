@@ -1,6 +1,6 @@
 [project]
 name = "exam-marking"
-version = "0.0.6"
+version = "0.0.7"
 description = "A tool to ease UNSW exam marking (COMP6841 in particular)."
 readme = "README.md"
 requires-python = ">=3.9"
