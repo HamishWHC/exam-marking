@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <title>Marks for "{{g.csv_filename}}"</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <script src="https://unpkg.com/stickythead"></script>
+
+    <style>
+        :root {
+            font-size: 16;
+        }
+
+        .answer {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            text-wrap-mode: wrap;
+            margin-bottom: 0;
+        }
+    </style>
+
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <table style="table-layout: fixed">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 50em">zID & Answer</th>
+                {% for col in g.columns %}
+                <th scope="col" style="width: 6.5rem">{{col[0]}} (/{{col[2]}})</th>
+                {% endfor %}
+                {% for _ in range(g.extra_cols) %}
+                <th scope="col" style="width: 6.5rem">?</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in g.marks %}
+            <tr>
+                <td>
+                    <form method="POST" action="/change" id="form-{{row['zid']}}"></form>
+                    <input form="form-{{row['zid']}}" type="hidden" name="zid" value="{{row['zid']}}">
+                    <div style="font-weight: bolder; margin-bottom: 0.25rem">{{row["zid"]}}</div>
+                    <pre class="answer">{{row["answer"]}}</pre>
+                </td>
+                {% for i, (mark, col) in enumerate(zip_longest(row['marks'], g.columns, fillvalue=None)) %}
+                <td>
+                    {% if col == None %}
+                    <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}">
+                    {% elif col[1] %}
+                    <input form="form-{{row['zid']}}" type="checkbox" name="marks-{{i}}" {% if mark %}checked{% endif %}
+                        value="{{col[2]}}">
+                    {% else %}
+                    <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}" max="{{col[2]}}"
+                        min="0">
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        let elements = document.querySelectorAll('table')
+        stickyThead.apply(elements)
+
+        let inputs = document.getElementsByTagName("input")
+        for (const input of inputs) {
+            input.addEventListener("change", async () => {
+                input.form.requestSubmit()
+                form.submit()
+            })
+        }
+
+        let first_unmarked_form = document.getElementById("form-{{first_unmarked}}")
+        if (first_unmarked_form) {
+            first_unmarked_form.scrollIntoView(true)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+[project]
+name = "exam-marking"
+version = "0.0.5"
+description = "A tool to ease UNSW exam marking (COMP6841 in particular)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["click>=8.1.7", "flask>=3.1.0"]
+
+[project.scripts]
+exam-marking = "exam_marking:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
