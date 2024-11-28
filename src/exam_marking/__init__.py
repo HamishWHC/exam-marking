@@ -86,7 +86,7 @@ def main(
                 MARKS.append(
                     {
                         **row,
-                        "marks": [None if m == "" else int(m) for m in row["marks"]],
+                        "marks": [None if m == "" else m for m in row["marks"]],
                     }
                 )
                 if len(row["marks"]) > len(columns):

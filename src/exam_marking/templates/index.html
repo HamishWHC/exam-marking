@@ -71,8 +71,7 @@
         let inputs = document.getElementsByTagName("input")
         for (const input of inputs) {
             input.addEventListener("change", async () => {
-                input.form.requestSubmit()
-                form.submit()
+                input.form.submit()
             })
         }
 
