@@ -1,10 +1,37 @@
 [project]
 name = "exam-marking"
-version = "0.0.5"
+version = "0.0.6"
 description = "A tool to ease UNSW exam marking (COMP6841 in particular)."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = ["click>=8.1.7", "flask>=3.1.0"]
+license = { file = "LICENSE" }
+authors = [{ name = "Hamish Cox", email = "hamish@hamishwhc.com" }]
+maintainers = [{ name = "Hamish Cox", email = "hamish@hamishwhc.com" }]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: End Users/Desktop",
+    "Environment :: Console",
+
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Repository = "https://github.com/HamishWHC/exam-marking.git"
+Issues = "https://github.com/HamishWHC/exam-marking/issues"
 
 [project.scripts]
 exam-marking = "exam_marking:main"

@@ -11,7 +11,7 @@ from exam_marking import routes
 
 ZID_REGEX = re.compile(r"z[0-9]{7,8}")
 SEPARATOR_REGEX = re.compile(
-    r"####################\n##### (z[0-9]{7,8}) #####\n####################"
+    r"####################\n##### (z[0-9]{7}) #####\n####################"
 )
 
 
@@ -21,12 +21,25 @@ def strip_lines(a: str):
     return a
 
 
-@click.command()
-@click.option("--import-answers", type=click.File())
-@click.option("--column", "columns", type=(str, bool, int), multiple=True)
-@click.option("--port", type=int)
+@click.command(
+    help="Reads answers and marks from MARKS_PATH and starts a webserver where you can fill in marks. Marks will be saved periodically and when you Ctrl+C the process."
+)
+@click.option(
+    "--import-answers",
+    type=click.File(),
+    help="Imports answers from the provided txt file. Overwrites file at MARKS_PATH. Answers are expected to be separated by a block of hashes 20 wide, with the center of the middle line containing a zID (z[0-9]{7}) with a single space on either side.",
+)
+@click.option(
+    "--column",
+    "columns",
+    type=(str, bool, int),
+    multiple=True,
+    help="A set of columns to provide in the marking interface. Each column should have a name, either true or false to indicate whether it is a checkbox or not, and a maximum value (or the value for true checkboxes).",
+)
+@click.option("--port", type=int, help="Port to use for webserver. Defaults to 8000.")
 @click.argument(
-    "marks-path", type=click.Path(dir_okay=False, writable=True, path_type=Path)
+    "marks_path",
+    type=click.Path(dir_okay=False, writable=True, path_type=Path),
 )
 def main(
     import_answers: Optional[IO[str]],
