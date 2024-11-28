@@ -49,13 +49,13 @@
                 {% for i, (mark, col) in enumerate(zip_longest(row['marks'], g.columns, fillvalue=None)) %}
                 <td>
                     {% if col == None %}
-                    <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}">
+                    <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}" step="any">
                     {% elif col[1] %}
                     <input form="form-{{row['zid']}}" type="checkbox" name="marks-{{i}}" {% if mark %}checked{% endif %}
                         value="{{col[2]}}">
                     {% else %}
                     <input form="form-{{row['zid']}}" type="number" name="marks-{{i}}" value="{{mark}}" max="{{col[2]}}"
-                        min="0">
+                        min="0" step="any">
                     {% endif %}
                 </td>
                 {% endfor %}
